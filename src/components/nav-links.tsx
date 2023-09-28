@@ -1,25 +1,12 @@
 "use client";
+import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const Links = [
-  {
-    href: "/blog",
-    name: "blog",
-  },
-  {
-    href: "/projects",
-    name: "projects",
-  },
-  {
-    href: "/about",
-    name: "about",
-  },
-];
-
 export function NavLinks() {
   var pathName = usePathname().slice(1);
+  const Links = siteConfig.mainNav;
 
   const capitalizeFirstLetter = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
