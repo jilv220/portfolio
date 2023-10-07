@@ -1,7 +1,10 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { db } from "@/db/drizzle";
 
 export const authOptions: NextAuthOptions = {
+  adapter: DrizzleAdapter(db),
   providers: [
     CredentialsProvider({
       name: "Credentials",

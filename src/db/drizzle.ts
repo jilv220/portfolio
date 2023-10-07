@@ -9,4 +9,4 @@ const connection = connect({
   password: process.env.DATABASE_PASSWORD,
 });
 
-const db = drizzle(connection);
+export const db = drizzle(connection);
