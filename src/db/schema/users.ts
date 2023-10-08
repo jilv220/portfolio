@@ -1,18 +1,15 @@
 import {
-  int,
   timestamp,
-  mysqlTable,
+  pgTable,
+  text,
   primaryKey,
-  varchar,
-} from "drizzle-orm/mysql-core";
+  integer,
+} from "drizzle-orm/pg-core";
 
-export const users = mysqlTable("user", {
-  id: varchar("id", { length: 255 }).notNull().primaryKey(),
-  name: varchar("name", { length: 255 }),
-  email: varchar("email", { length: 255 }).notNull(),
-  emailVerified: timestamp("emailVerified", {
-    mode: "date",
-    fsp: 3,
-  }).defaultNow(),
-  image: varchar("image", { length: 255 }),
+export const users = pgTable("user", {
+  id: text("id").notNull().primaryKey(),
+  name: text("name"),
+  email: text("email").notNull(),
+  emailVerified: timestamp("emailVerified", { mode: "date" }),
+  image: text("image"),
 });

@@ -7,14 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:generate": "drizzle-kit generate:mysql",
-    "db:push": "drizzle-kit push:mysql",
+    "db:generate": "drizzle-kit generate:pg",
+    "db:push": "drizzle-kit push:pg",
     "db:drop": "drizzle-kit drop"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^0.3.3",
     "@hookform/resolvers": "^3.3.1",
-    "@planetscale/database": "^1.11.0",
+    "@neondatabase/serverless": "^0.6.0",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-dropdown-menu": "^2.0.5",
     "@radix-ui/react-label": "^2.0.2",

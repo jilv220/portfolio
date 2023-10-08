@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
@@ -10,30 +12,63 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { siteConfig } from "@/config/site";
+import { signOut, useSession } from "next-auth/react";
+import { Button } from "./ui/button";
+
+const DropDownContentUnAuthed = () => {
+  const items = siteConfig.dropDownNav;
+  return (
+    <>
+      {items.map(
+        (item) =>
+          item.href && (
+            <Link href={item.href} key={item.title}>
+              <DropdownMenuItem className="cursor-pointer">
+                {item.title}
+              </DropdownMenuItem>
+            </Link>
+          )
+      )}
+    </>
+  );
+};
+
+const DropDownContentAuthed = () => {
+  return (
+    <>
+      <DropdownMenuItem
+        onClick={() => signOut({ callbackUrl: "/blog" })}
+        className="cursor-pointer"
+      >
+        Sign Out
+      </DropdownMenuItem>
+    </>
+  );
+};
 
 export function NavDropDown() {
-  const items = siteConfig.dropDownNav;
+  const { data: session, status } = useSession();
+  const userAvatar = session?.user?.image || "";
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar className="h-10 w-10">
-          <span className="flex h-full w-full items-center justify-center rounded-full bg-muted">
-            AI
-          </span>
+          <AvatarImage src={userAvatar} />
+          <AvatarFallback>AF</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        {items.map(
-          (item) =>
-            item.href && (
-              <Link href={item.href} key={item.title}>
-                <DropdownMenuItem className="cursor-pointer">
-                  {item.title}
-                </DropdownMenuItem>
-              </Link>
-            )
+        {status === "authenticated" && (
+          <>
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+          </>
+        )}
+        {status === "unauthenticated" ? (
+          <DropDownContentUnAuthed />
+        ) : (
+          <DropDownContentAuthed />
         )}
       </DropdownMenuContent>
     </DropdownMenu>
