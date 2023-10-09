@@ -1,12 +1,15 @@
 import { ModeToggle } from "./theme-toggle";
 import { NavLinks } from "./nav-links";
 import { NavDropDown } from "./nav-dropdown";
+import { Text } from "./ui/typography";
 
 export function Header() {
   return (
     <header className="bg-background/95 sticky top-0 z-50 w-full border-b">
       <div className="container flex h-14 items-center space-x-2">
-        <div className="font-bold text-foreground">Lyu&#39;s Portfolio</div>
+        <Text className="text-foreground" textAs="div" textVariant="largeText">
+          Lyu&#39;s Portfolio
+        </Text>
         <div className="flex-grow">
           <nav
             className="flex items-center justify-center space-x-6 text-sm 

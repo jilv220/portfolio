@@ -17,7 +17,10 @@ export function NavLinks() {
       {Links.map((el, i) => (
         <Link
           href={el.href}
-          className={cn(pathName == el.name && "text-foreground")}
+          className={cn(
+            "hover:text-foreground/80",
+            pathName == el.name && "text-foreground"
+          )}
           key={i}
         >
           {capitalizeFirstLetter(el.name)}
