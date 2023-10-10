@@ -3,16 +3,16 @@ export const siteConfig = {
   description: "A portfolio that covers blog, projects and overall of Lyu Ji.",
   mainNav: [
     {
-      href: "/blog",
-      name: "blog",
+      href: "/about",
+      name: "about",
     },
     {
       href: "/projects",
       name: "projects",
     },
     {
-      href: "/about",
-      name: "about",
+      href: "/blog",
+      name: "blog",
     },
   ],
   dropDownNav: [

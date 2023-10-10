@@ -21,19 +21,5 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.DISCORD_CLIENT_ID!,
       clientSecret: process.env.DISCORD_CLIENT_SECRET!,
     }),
-    // CredentialsProvider({
-    //   name: "Credentials",
-    //   credentials: {
-    //     email: { label: "Username", type: "text" },
-    //     password: { label: "Password", type: "password" },
-    //   },
-    //   authorize(credentials: any, req) {
-    //     // database operations
-    //     return {
-    //       id: "1",
-    //       Email: credentials.email,
-    //     };
-    //   },
-    // }),
   ],
 };

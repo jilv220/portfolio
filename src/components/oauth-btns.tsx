@@ -9,22 +9,23 @@ import Discord from "./brand-icons/discord-icon";
 
 export default function OAuthBtns() {
   const { data: session, status } = useSession();
+  const callbackUrl = "/";
 
   if (status === "authenticated") {
-    redirect("/blog");
+    redirect(callbackUrl);
   }
 
   return (
     <div className="flex flex-col gap-2 w-full">
-      <Button onClick={() => signIn("github", { callbackUrl: "/blog" })}>
+      <Button onClick={() => signIn("github", { callbackUrl })}>
         <Github className="mr-2 h-4 w-4" />
         Sign in with Github
       </Button>
-      <Button onClick={() => signIn("google", { callbackUrl: "/blog" })}>
+      <Button onClick={() => signIn("google", { callbackUrl })}>
         <Google className="mr-2 h-4 w-4" />
         Sign in with Google
       </Button>
-      <Button onClick={() => signIn("discord", { callbackUrl: "/blog" })}>
+      <Button onClick={() => signIn("discord", { callbackUrl })}>
         <Discord className="mr-2 h-4 w-4" />
         Sign in with Discord
       </Button>

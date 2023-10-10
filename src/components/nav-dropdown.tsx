@@ -37,7 +37,7 @@ const DropDownContentAuthed = () => {
   return (
     <>
       <DropdownMenuItem
-        onClick={() => signOut({ callbackUrl: "/blog" })}
+        onClick={() => signOut({ callbackUrl: "/" })}
         className="cursor-pointer"
       >
         Sign Out

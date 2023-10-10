@@ -6,6 +6,12 @@ import { usePathname } from "next/navigation";
 
 export function NavLinks() {
   var pathName = usePathname().slice(1);
+
+  // handle the index rewrite
+  if (pathName === "") {
+    pathName = "about";
+  }
+
   const Links = siteConfig.mainNav;
 
   const capitalizeFirstLetter = (str: string) => {
@@ -19,7 +25,7 @@ export function NavLinks() {
           href={el.href}
           className={cn(
             "hover:text-foreground/80",
-            pathName == el.name && "text-foreground"
+            pathName.startsWith(el.name) && "text-foreground"
           )}
           key={i}
         >
