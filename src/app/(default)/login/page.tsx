@@ -15,43 +15,11 @@ export default async function LoginPage() {
     <div className="container">
       <div className="mt-6 flex flex-col items-center justify-center">
         <Card className="md:w-[40%]">
-          <CardHeader>
-            <CardTitle>Sign In</CardTitle>
-            <CardDescription>Need an account?</CardDescription>
+          <CardHeader className="space-y-0">
+            <CardTitle className="text-3xl">Sign In</CardTitle>
+            <div className="text-muted-foreground">continue with: </div>
           </CardHeader>
-          <CardContent>
-            <form className="w-full">
-              <fieldset>
-                <Input
-                  name="email"
-                  type="email"
-                  placeholder="Email"
-                  autoComplete="email"
-                  className="mb-4 px-6 py-4 text-base"
-                  required
-                ></Input>
-                <Input
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  className="mb-4 px-6 py-4 text-base"
-                ></Input>
-              </fieldset>
-              <Button
-                className="float-right px-6 py-4 text-base"
-                size="lg"
-                type="submit"
-              >
-                Sign in
-              </Button>
-            </form>
-          </CardContent>
           <CardFooter className="w-full flex-col">
-            <div className="relative flex py-5 items-center w-full">
-              <div className="flex-grow border-t border-border"></div>
-              <span className="flex-shrink mx-4 text-foreground">OR</span>
-              <div className="flex-grow border-t border-border"></div>
-            </div>
             <OAuthBtns></OAuthBtns>
           </CardFooter>
         </Card>

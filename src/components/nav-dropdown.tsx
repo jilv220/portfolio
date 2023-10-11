@@ -13,7 +13,6 @@ import {
 } from "./ui/dropdown-menu";
 import { siteConfig } from "@/config/site";
 import { signOut, useSession } from "next-auth/react";
-import { Button } from "./ui/button";
 
 const DropDownContentUnAuthed = () => {
   const items = siteConfig.dropDownNav;

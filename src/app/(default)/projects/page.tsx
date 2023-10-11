@@ -4,7 +4,7 @@ import { Heading } from "@/components/ui/typography";
 export default function Projects() {
   return (
     <main className="pt-6 container">
-      <Heading headingVariant="h2"> Main Projects </Heading>
+      <Heading as="h2"> Main Projects </Heading>
       <section className="grid grid-cols-3 gap-4 pt-6">
         <ProjectCard
           title="Lbrygen"
@@ -27,7 +27,7 @@ export default function Projects() {
         ></ProjectCard>
       </section>
 
-      <Heading headingVariant="h2" className="pt-6">
+      <Heading as="h2" className="pt-6">
         {" "}
         Misc.{" "}
       </Heading>

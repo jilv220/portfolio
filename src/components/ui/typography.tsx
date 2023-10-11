@@ -70,15 +70,16 @@ export interface TypographyProps
 }
 
 type HeadingTypes = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-interface HeadingProps extends TypographyProps {
-  headingVariant?: HeadingTypes;
+interface HeadingProps extends React.HTMLAttributes<HTMLElement> {
+  variant?: HeadingTypes;
+  as?: HeadingTypes;
 }
 
 type TextAsTypes = "p" | "label" | "div" | "span";
 type TextTypes = "p" | "smallText" | "mediumText" | "largeText" | "mutedText";
-interface TextProps extends TypographyProps {
-  textAs?: TextAsTypes;
-  textVariant?: TextTypes;
+interface TextProps extends React.HTMLAttributes<HTMLElement> {
+  variant?: TextTypes;
+  as?: TextAsTypes;
 }
 
 const Typography = React.forwardRef<HTMLElement, TypographyProps>(
@@ -98,27 +99,14 @@ const Typography = React.forwardRef<HTMLElement, TypographyProps>(
 
 Typography.displayName = "Typography";
 
-const Heading = ({
-  className,
-  children,
-  headingVariant = "h3",
-}: HeadingProps) => (
-  <Typography
-    className={className}
-    variant={headingVariant}
-    as={headingVariant}
-  >
+const Heading = ({ className, children, variant = "h3" }: HeadingProps) => (
+  <Typography className={className} variant={variant} as={variant}>
     {children}
   </Typography>
 );
 
-const Text = ({
-  className,
-  children,
-  textAs = "p",
-  textVariant = "p",
-}: TextProps) => (
-  <Typography className={className} variant={textVariant} as={textAs}>
+const Text = ({ className, children, as = "p", variant = "p" }: TextProps) => (
+  <Typography className={className} variant={variant} as={as}>
     {children}
   </Typography>
 );

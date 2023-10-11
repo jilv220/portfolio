@@ -2,14 +2,16 @@
 
 import { signIn, useSession } from "next-auth/react";
 import { Button } from "./ui/button";
-import { redirect } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { Github, Twitter } from "lucide-react";
 import Google from "./brand-icons/google-icon";
 import Discord from "./brand-icons/discord-icon";
 
 export default function OAuthBtns() {
   const { data: session, status } = useSession();
-  const callbackUrl = "/";
+
+  const params = useSearchParams();
+  const callbackUrl = params.get("callbackUrl") || "/";
 
   if (status === "authenticated") {
     redirect(callbackUrl);
