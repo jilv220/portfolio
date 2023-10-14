@@ -1,22 +1,29 @@
-import { Comment } from "@/db/schema/comments";
 import { formatDistanceToNowStrict } from "date-fns";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
-type BlogCommentProp = Pick<Comment, "createdAt" | "content"> & {
+export type BlogCommentProps = {
+  content: string;
   userName: string;
+  userAvatar: string;
+  createdAt: string;
 };
 
 export default function BlogComment({
   content,
   userName,
+  userAvatar,
   createdAt,
-}: BlogCommentProp) {
-  const commentDate = formatDistanceToNowStrict(createdAt, {
+}: BlogCommentProps) {
+  const commentDate = formatDistanceToNowStrict(new Date(createdAt), {
     addSuffix: true,
   });
 
   return (
-    <div className="flex space-x-4">
-      <div className="flex-shrink-0"></div>
+    <div className="flex items-center space-x-4">
+      <Avatar className="h-10 w-10">
+        <AvatarImage src={userAvatar} />
+        <AvatarFallback>AF</AvatarFallback>
+      </Avatar>
       <div className="flex-grow">
         <div className="flex space-x-2">
           <b>{userName}</b>

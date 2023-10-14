@@ -20,11 +20,29 @@ export const comments = pgTable("comment", {
     .references(() => users.id, { onDelete: "cascade" }),
 });
 
-export const insertCommentSchema = createInsertSchema(comments);
+const commentSchemaOverride = {
+  content: z
+    .string()
+    .nonempty({
+      message: "comment cannot be empty",
+    })
+    .max(256, {
+      message: "comment cannot be more than 256 characters",
+    }),
+};
+
+export const insertCommentSchema = createInsertSchema(
+  comments,
+  commentSchemaOverride
+);
 export const FEInsertCommentSchema = insertCommentSchema.pick({
   content: true,
 });
-export const selectCommentSchema = createSelectSchema(comments);
+
+export const selectCommentSchema = createSelectSchema(
+  comments,
+  commentSchemaOverride
+);
 
 export type Comment = z.infer<typeof selectCommentSchema>;
 export type Comments = Comment[];
