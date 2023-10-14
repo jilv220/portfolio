@@ -1,12 +1,9 @@
 import { Heading, Text } from "@/components/ui/typography";
-import { getAllPosts, getPostBySlug } from "@/lib/getBlogs";
+import { getPostBySlug } from "@/lib/getBlogs";
 import markdownToHtml from "@/lib/markdownToHtml";
 import { cn } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import { formatDistanceToNowStrict } from "date-fns";
-import { Textarea } from "@/components/ui/textarea";
-import { Button, buttonVariants } from "@/components/ui/button";
-import Link from "next/link";
 import BlogCommentArea from "@/components/blog-comment-area";
 
 export default async function BlogPost({

@@ -1,12 +1,5 @@
-import { authOptions } from "@/config/auth-options";
 import { db } from "@/db/drizzle";
-import {
-  comments,
-  insertCommentSchema,
-  selectCommentSchema,
-} from "@/db/schema/comments";
-import { getServerSession } from "next-auth";
-import { getCsrfToken } from "next-auth/react";
+import { comments, insertCommentSchema } from "@/db/schema/comments";
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { sessions } from "@/db/schema/sessions";
@@ -34,7 +27,7 @@ export async function POST(req: NextRequest) {
     .from(sessions)
     .where(eq(sessions.sessionToken, token.value));
 
-  const newComment = {
+  const newComment: unknown = {
     ...data,
     ...userId,
     createdAt: dateNow(),

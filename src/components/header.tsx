@@ -1,6 +1,5 @@
 import { ModeToggle } from "./theme-toggle";
 import { NavLinks } from "./nav-links";
-import { NavDropDown } from "./nav-dropdown";
 import { Text } from "./ui/typography";
 
 export function Header() {

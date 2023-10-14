@@ -7,14 +7,11 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { FieldValue, useForm, FieldValues } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Text } from "./ui/typography";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import {
-  FEInsertCommentSchema,
-  insertCommentSchema,
-} from "@/db/schema/comments";
+import { FEInsertCommentSchema } from "@/db/schema/comments";
 
 export default function BlogCommentArea() {
   const path = usePathname();
@@ -34,7 +31,6 @@ export default function BlogCommentArea() {
   });
 
   const submitHandler = async (data: z.infer<typeof FEInsertCommentSchema>) => {
-    console.log(data.content);
     await fetch("/api/comment", {
       method: "POST",
       headers: {
