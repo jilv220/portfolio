@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FEInsertCommentSchema } from "@/db/schema/comments";
 import BlogCommentList from "./blog-comment-list";
-import { useFetch } from "@/lib/useFetch";
+import { invalidateCache, useFetch } from "@/lib/useFetch";
 import { useEffect, useState } from "react";
 import { BlogCommentProps } from "./blog-comment";
 
@@ -83,6 +83,7 @@ export default function BlogCommentArea() {
     if (resp && resp.ok) {
       const newComment = await resp.json();
       setComments([newComment, ...comments]);
+      invalidateCache(`/api/comment/${slug}`);
     }
   };
 

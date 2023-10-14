@@ -12,6 +12,7 @@ export const useFetch = (url: string) => {
     const fetchData = async () => {
       setStatus("fetching");
       if (cache.has(url)) {
+        console.log("hmm...");
         const data = cache.get(url);
         if (data) {
           setData(data);
@@ -40,3 +41,7 @@ export const useFetch = (url: string) => {
 
   return { status, data };
 };
+
+export function invalidateCache(url: string) {
+  cache.delete(url);
+}
