@@ -11,10 +11,9 @@ import { useForm } from "react-hook-form";
 import { Text } from "./ui/typography";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { FEInsertCommentSchema } from "@/db/schema/comments";
+import { FEComment, FEInsertCommentSchema } from "@/db/schema/comments";
 import BlogCommentList from "./blog-comment-list";
-import { invalidateCache, useFetch } from "@/lib/useFetch";
-import { useEffect, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { BlogCommentProps } from "./blog-comment";
 
 function UnAuthed({
@@ -54,42 +53,47 @@ export default function BlogCommentArea() {
   });
 
   const slug = path.split("/").at(-1) || "";
-  const resp = useFetch(`/api/comment/${slug}`);
-  const [comments, setComments] = useState<BlogCommentProps[]>([]);
+  const pathFetchComment = `/api/comment/${slug}`;
 
-  useEffect(() => {
-    if (resp.status === "success") {
-      setComments(resp.data as unknown as BlogCommentProps[]);
-    }
-  }, [resp.status]);
+  const queryClient = useQueryClient();
+  const query = useQuery({
+    queryKey: ["comment", slug],
+    queryFn: async () =>
+      await fetch(pathFetchComment).then((res) => res.json()),
+  });
+  const comments = query.data;
+
+  const mutation = useMutation({
+    mutationFn: async (data: FEComment) =>
+      await fetch(pathFetchComment, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: data.content,
+        }),
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["comment", slug] });
+    },
+  });
 
   // Don't forget that there are three states...
   if (status !== "authenticated") {
     return <UnAuthed path={path} comments={comments} />;
   }
 
-  const submitHandler = async (data: z.infer<typeof FEInsertCommentSchema>) => {
-    const resp = await fetch(`/api/comment/${slug}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        content: data.content,
-      }),
-    }).catch(() => undefined);
-
+  const submitHandler = async (data: FEComment) => {
+    mutation.mutate({
+      content: data.content,
+    });
     reset();
-    if (resp && resp.ok) {
-      const newComment = await resp.json();
-      setComments([newComment, ...comments]);
-      invalidateCache(`/api/comment/${slug}`);
-    }
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit(submitHandler)}>
+      <form id="comment-area-form" onSubmit={handleSubmit(submitHandler)}>
         {errors.content && (
           <Text className="text-destructive" role="alert">
             {errors.content?.message as string}
@@ -101,30 +105,31 @@ export default function BlogCommentArea() {
           {...register("content")}
           aria-invalid={errors.content ? "true" : "false"}
         />
-        <div className="my-4 flex flex-row justify-between">
-          <Avatar className="h-10 w-10">
-            <AvatarImage src={userAvatar} />
-            <AvatarFallback>AF</AvatarFallback>
-          </Avatar>
-          <div className="space-x-2">
-            <input
-              type="submit"
-              className={cn(
-                buttonVariants({ variant: "default" }),
-                "cursor-pointer"
-              )}
-              value="Send"
-            />
-            <Button
-              variant={"destructive"}
-              onClick={() => signOut({ callbackUrl: path })}
-            >
-              Log Out
-            </Button>
-          </div>
-        </div>
-        <BlogCommentList comments={comments} />
       </form>
+      <div className="my-4 flex flex-row justify-between">
+        <Avatar className="h-10 w-10">
+          <AvatarImage src={userAvatar} />
+          <AvatarFallback>AF</AvatarFallback>
+        </Avatar>
+        <div className="space-x-2">
+          <input
+            type="submit"
+            form="comment-area-form"
+            className={cn(
+              buttonVariants({ variant: "default" }),
+              "cursor-pointer"
+            )}
+            value="Send"
+          />
+          <Button
+            variant={"destructive"}
+            onClick={() => signOut({ callbackUrl: path })}
+          >
+            Log Out
+          </Button>
+        </div>
+      </div>
+      <BlogCommentList comments={comments} />
     </>
   );
 }

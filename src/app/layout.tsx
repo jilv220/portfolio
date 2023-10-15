@@ -6,6 +6,7 @@ import { Header } from "@/components/header";
 import { Container } from "@/components/ui/container";
 import NextAuthSessionProvider from "@/components/session-provider";
 import { siteConfig } from "@/config/site";
+import NextQueryProvider from "@/components/query-provider";
 
 export const metadata: Metadata = {
   title: siteConfig.title,
@@ -27,10 +28,12 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NextAuthSessionProvider>
-            <Container>
-              <Header></Header>
-              {children}
-            </Container>
+            <NextQueryProvider>
+              <Container>
+                <Header></Header>
+                {children}
+              </Container>
+            </NextQueryProvider>
           </NextAuthSessionProvider>
         </ThemeProvider>
       </body>

@@ -1,5 +1,5 @@
-import { formatDistanceToNowStrict } from "date-fns";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { distanceToNow } from "@/lib/utils";
 
 export type BlogCommentProps = {
   content: string;
@@ -14,9 +14,7 @@ export default function BlogComment({
   userAvatar,
   createdAt,
 }: BlogCommentProps) {
-  const commentDate = formatDistanceToNowStrict(new Date(createdAt), {
-    addSuffix: true,
-  });
+  const commentDate = distanceToNow(createdAt);
 
   return (
     <div className="flex items-center space-x-4">

@@ -1,9 +1,8 @@
 import { Heading, Text } from "@/components/ui/typography";
 import { getPostBySlug } from "@/lib/getBlogs";
 import markdownToHtml from "@/lib/markdownToHtml";
-import { cn } from "@/lib/utils";
+import { cn, distanceToNow } from "@/lib/utils";
 import { notFound } from "next/navigation";
-import { formatDistanceToNowStrict } from "date-fns";
 import BlogCommentArea from "@/components/blog-comment-area";
 
 export default async function BlogPost({
@@ -18,9 +17,7 @@ export default async function BlogPost({
 
   const blogMeta = blog.data;
   const blogContent = await markdownToHtml(blog.content);
-  const blogDate = formatDistanceToNowStrict(blogMeta.date, {
-    addSuffix: true,
-  });
+  const blogDate = distanceToNow(blogMeta.date);
 
   return (
     <article>

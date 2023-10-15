@@ -46,3 +46,5 @@ export const selectCommentSchema = createSelectSchema(
 
 export type Comment = z.infer<typeof selectCommentSchema>;
 export type Comments = Comment[];
+
+export type FEComment = z.infer<typeof FEInsertCommentSchema>;
