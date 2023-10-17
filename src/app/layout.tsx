@@ -7,6 +7,12 @@ import { Container } from "@/components/ui/container";
 import NextAuthSessionProvider from "@/components/session-provider";
 import { siteConfig } from "@/config/site";
 import NextQueryProvider from "@/components/query-provider";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: siteConfig.title,
@@ -20,7 +26,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn("min-h-screen bg-background font-sans antialiased")}>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          inter.className
+        )}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

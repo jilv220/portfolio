@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export function NavLinks() {
-  var pathName = usePathname().slice(1);
+  let pathName = usePathname().slice(1);
 
   // handle the index rewrite
   if (pathName === "") {
