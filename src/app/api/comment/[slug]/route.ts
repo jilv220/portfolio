@@ -6,18 +6,21 @@ import { sessions } from "@/db/schema/sessions";
 import { desc, eq } from "drizzle-orm";
 import { dateNow } from "@/lib/utils";
 import { users } from "@/db/schema/users";
+import { z } from "zod";
 
 export async function GET(
-  request: Request,
+  req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
   const slug = params.slug;
   const blogComments = await db
     .select({
+      commentId: comments.commentId,
       content: comments.content,
+      createdAt: comments.createdAt,
+      slug: comments.slug,
       userName: users.name,
       userAvatar: users.image,
-      createdAt: comments.createdAt,
     })
     .from(comments)
     .where(eq(comments.slug, slug))
@@ -42,7 +45,7 @@ export async function POST(
         error: "User needs log in first to comment",
       },
       {
-        status: 403,
+        status: 401,
       }
     );
   }
@@ -72,22 +75,61 @@ export async function POST(
   }
 
   // fix error here
-  await db.insert(comments).values(parseRes.data);
-
-  const [newCommentReturned] = await db
-    .select({
-      content: comments.content,
-      userName: users.name,
-      userAvatar: users.image,
-      createdAt: comments.createdAt,
-    })
-    .from(comments)
-    .where(eq(comments.slug, slug))
-    .leftJoin(users, eq(comments.userId, users.id))
-    .orderBy(desc(comments.createdAt))
-    .limit(1);
+  const newCommentReturned = await db
+    .insert(comments)
+    .values(parseRes.data)
+    .returning();
 
   return NextResponse.json(newCommentReturned, {
     status: 201,
   });
+}
+
+export async function DELETE(req: NextRequest) {
+  const cookieStore = cookies();
+  const token = cookieStore.get("next-auth.session-token");
+
+  if (!token) {
+    return NextResponse.json(
+      {
+        error: "Unauthorized",
+      },
+      {
+        status: 401,
+      }
+    );
+  }
+
+  const searchParams = req.nextUrl.searchParams;
+  const commentIdParam = searchParams.get("id");
+  const parseRes = z.coerce.number().safeParse(commentIdParam);
+  if (!parseRes.success) {
+    return NextResponse.json(
+      {
+        error: parseRes.error.flatten(),
+      },
+      {
+        status: 400,
+      }
+    );
+  }
+
+  const commentId = parseRes.data;
+  const deleteRes = await db
+    .delete(comments)
+    .where(eq(comments.commentId, commentId))
+    .returning();
+
+  if (deleteRes.length === 0) {
+    return NextResponse.json(
+      {
+        error: "Comment not found",
+      },
+      {
+        status: 404,
+      }
+    );
+  }
+
+  return NextResponse.json("success");
 }

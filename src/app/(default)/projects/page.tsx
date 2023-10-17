@@ -34,13 +34,13 @@ export default function Projects() {
       <section className="grid grid-cols-3 gap-4 py-6">
         <ProjectCard
           title="BB_RPB_TSL"
-          description="A Trading strategy for the Freqtrade crypto bot"
+          description="A Trading Strategy for the Freqtrade Crypto Bot"
           tags={["python", "freqtrade"]}
           link="https://github.com/jilv220/BB_RPB_TSL"
         ></ProjectCard>
         <ProjectCard
           title="Nos Naive Recommend"
-          description="A naive recommendation system for nostr, based on zero-shot classifier"
+          description="A Naive Recommendation System for Nostr, Based on Zero-Shot Classifier"
           tags={["fastify", "redis", "docker", "rambda", "nostr"]}
           link="https://github.com/jilv220/nos-naive-recommend"
         ></ProjectCard>
