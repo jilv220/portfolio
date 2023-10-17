@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 export type BlogCommentProps = {
   commentId: number;
   content: string;
+  userId: string;
   userName: string;
   userAvatar: string;
   createdAt: string;
@@ -17,6 +18,7 @@ export type BlogCommentProps = {
 export default function BlogComment({
   commentId,
   content,
+  userId,
   userName,
   userAvatar,
   createdAt,
@@ -24,7 +26,7 @@ export default function BlogComment({
 }: BlogCommentProps) {
   const commentDate = distanceToNow(createdAt);
   const { data } = useSession();
-  const isUserComment = data?.user?.name === userName;
+  const isUserComment = data?.user?.id === userId;
 
   const queryClient = useQueryClient();
 

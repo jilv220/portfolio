@@ -21,4 +21,11 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.DISCORD_CLIENT_SECRET!,
     }),
   ],
+  callbacks: {
+    async session({ session, user }) {
+      // Expose userId to client
+      session.user.id = user.id;
+      return session;
+    },
+  },
 };

@@ -1,12 +1,11 @@
 import { db } from "@/db/drizzle";
 import { comments, insertCommentSchema } from "@/db/schema/comments";
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { sessions } from "@/db/schema/sessions";
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import { dateNow } from "@/lib/utils";
 import { users } from "@/db/schema/users";
 import { z } from "zod";
+import { getUserIdFromSession } from "@/lib/getUserIdFromSession";
 
 export async function GET(
   req: NextRequest,
@@ -19,6 +18,7 @@ export async function GET(
       content: comments.content,
       createdAt: comments.createdAt,
       slug: comments.slug,
+      userId: users.id,
       userName: users.name,
       userAvatar: users.image,
     })
@@ -36,10 +36,9 @@ export async function POST(
 ) {
   const slug = params.slug;
   const data = await req.json();
-  const cookieStore = cookies();
-  const token = cookieStore.get("next-auth.session-token");
+  const userId = await getUserIdFromSession();
 
-  if (!token) {
+  if (!userId) {
     return NextResponse.json(
       {
         error: "User needs log in first to comment",
@@ -50,15 +49,10 @@ export async function POST(
     );
   }
 
-  const [userId] = await db
-    .select({ userId: sessions.userId })
-    .from(sessions)
-    .where(eq(sessions.sessionToken, token.value));
-
   const newComment: unknown = {
     ...data,
     slug,
-    ...userId,
+    userId,
     createdAt: dateNow(),
   };
 
@@ -86,10 +80,8 @@ export async function POST(
 }
 
 export async function DELETE(req: NextRequest) {
-  const cookieStore = cookies();
-  const token = cookieStore.get("next-auth.session-token");
-
-  if (!token) {
+  const userId = await getUserIdFromSession();
+  if (!userId) {
     return NextResponse.json(
       {
         error: "Unauthorized",
@@ -117,7 +109,7 @@ export async function DELETE(req: NextRequest) {
   const commentId = parseRes.data;
   const deleteRes = await db
     .delete(comments)
-    .where(eq(comments.commentId, commentId))
+    .where(and(eq(comments.commentId, commentId), eq(comments.userId, userId)))
     .returning();
 
   if (deleteRes.length === 0) {
