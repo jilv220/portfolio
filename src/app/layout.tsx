@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/container";
 import NextAuthSessionProvider from "@/components/session-provider";
 import { siteConfig } from "@/config/site";
 import NextQueryProvider from "@/components/query-provider";
+import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 
 const inter = Inter({
@@ -47,6 +48,7 @@ export default function RootLayout({
                 <Header></Header>
                 {children}
               </Container>
+              <Analytics />
             </NextQueryProvider>
           </NextAuthSessionProvider>
         </ThemeProvider>

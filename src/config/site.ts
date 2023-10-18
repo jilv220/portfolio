@@ -4,7 +4,7 @@ export const siteConfig = {
     "A portfolio with blog posts, projects and overall summary of Lyu Ji.",
   mainNav: [
     {
-      href: "/about",
+      href: "/",
       name: "about",
     },
     {
