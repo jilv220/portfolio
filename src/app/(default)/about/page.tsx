@@ -1,7 +1,19 @@
+import FollowMe from "@/components/follow-me";
+import { Heading } from "@/components/ui/typography";
+import { cn } from "@/lib/utils";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About",
+};
+
 export default function About() {
   return (
-    <div>
-      <div>dummy</div>
-    </div>
+    <main className={cn("container px-4 pt-14 max-w-2xl")}>
+      <Heading variant="h1" as="h1">
+        About Me
+      </Heading>
+      <FollowMe />
+    </main>
   );
 }

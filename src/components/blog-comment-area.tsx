@@ -74,8 +74,10 @@ export default function BlogCommentArea() {
           content: data.content,
         }),
       }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["comment", slug] });
+    onSettled: async () => {
+      return await queryClient.invalidateQueries({
+        queryKey: ["comment", slug],
+      });
     },
   });
 

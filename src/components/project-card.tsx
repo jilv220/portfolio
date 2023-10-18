@@ -53,11 +53,16 @@ export default function ProjectCard({
           <Link
             href={liveLink}
             className={buttonVariants({ variant: "default" })}
+            target="_blank"
           >
             Live Demo
           </Link>
         )}
-        <Link href={link} className={buttonVariants({ variant: "default" })}>
+        <Link
+          href={link}
+          className={buttonVariants({ variant: "default" })}
+          target="_blank"
+        >
           Github
         </Link>
       </CardFooter>

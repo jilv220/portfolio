@@ -1,9 +1,14 @@
 import ProjectCard from "@/components/project-card";
 import { Heading } from "@/components/ui/typography";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Projects",
+};
 
 export default function Projects() {
   return (
-    <main className="pt-6 container">
+    <main className="container pt-6">
       <Heading as="h2"> Main Projects </Heading>
       <section className="grid grid-cols-3 gap-4 pt-6">
         <ProjectCard

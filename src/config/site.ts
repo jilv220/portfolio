@@ -1,6 +1,7 @@
 export const siteConfig = {
-  title: "Lyu's Portfolio",
-  description: "A portfolio that covers blog, projects and overall of Lyu Ji.",
+  title: "Lyu Ji",
+  description:
+    "A portfolio with blog posts, projects and overall summary of Lyu Ji.",
   mainNav: [
     {
       href: "/about",

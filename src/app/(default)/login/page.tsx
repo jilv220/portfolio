@@ -1,5 +1,6 @@
 import OAuthBtns from "@/components/oauth-btns";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Suspense } from "react";
 
 export default async function LoginPage() {
   return (
@@ -11,7 +12,9 @@ export default async function LoginPage() {
             <div className="text-muted-foreground">continue with: </div>
           </CardHeader>
           <CardFooter className="w-full flex-col">
-            <OAuthBtns></OAuthBtns>
+            <Suspense>
+              <OAuthBtns></OAuthBtns>
+            </Suspense>
           </CardFooter>
         </Card>
       </div>

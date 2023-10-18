@@ -35,8 +35,10 @@ export default function BlogComment({
       await fetch(`/api/comment/${slug}?id=${commentId}`, {
         method: "DELETE",
       }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["comment", slug] });
+    onSettled: async () => {
+      return await queryClient.invalidateQueries({
+        queryKey: ["comment", slug],
+      });
     },
   });
 

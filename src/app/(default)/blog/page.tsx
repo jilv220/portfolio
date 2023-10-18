@@ -1,7 +1,12 @@
 import BlogPostPreview from "@/components/blog-post-preview";
 import { getAllPosts } from "@/lib/getBlogs";
 import { postsSchema } from "@/schemas/post";
+import { Metadata } from "next";
 import path from "path";
+
+export const metadata: Metadata = {
+  title: "Blog",
+};
 
 export default function Blog() {
   const posts = getAllPosts();
