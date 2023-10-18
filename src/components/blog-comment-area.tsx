@@ -110,7 +110,7 @@ export default function BlogCommentArea() {
       </form>
       <div className="flex flex-row justify-between my-4">
         <Avatar className="w-10 h-10">
-          <AvatarImage src={userAvatar} alt="Avatar" />
+          <AvatarImage src={userAvatar} />
           <AvatarFallback>AF</AvatarFallback>
         </Avatar>
         <div className="space-x-2">
