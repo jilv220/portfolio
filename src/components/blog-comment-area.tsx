@@ -108,9 +108,9 @@ export default function BlogCommentArea() {
           aria-invalid={errors.content ? "true" : "false"}
         />
       </form>
-      <div className="my-4 flex flex-row justify-between">
-        <Avatar className="h-10 w-10">
-          <AvatarImage src={userAvatar} />
+      <div className="flex flex-row justify-between my-4">
+        <Avatar className="w-10 h-10">
+          <AvatarImage src={userAvatar} alt="Avatar" />
           <AvatarFallback>AF</AvatarFallback>
         </Avatar>
         <div className="space-x-2">
