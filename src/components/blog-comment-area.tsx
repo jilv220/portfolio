@@ -21,7 +21,7 @@ function UnAuthed({
   comments,
 }: {
   path: string;
-  comments: BlogCommentProps[];
+  comments?: BlogCommentProps[];
 }) {
   return (
     <>
@@ -32,7 +32,7 @@ function UnAuthed({
       >
         Log In
       </Link>
-      <BlogCommentList comments={comments} />
+      {comments && <BlogCommentList comments={comments} />}
     </>
   );
 }
@@ -40,7 +40,10 @@ function UnAuthed({
 export default function BlogCommentArea() {
   const path = usePathname();
   const { data, status } = useSession();
-  const userAvatar = data?.user?.image || "";
+
+  const userId = data?.user.id || "";
+  const userName = data?.user.name || "";
+  const userAvatar = data?.user.image || "";
 
   const {
     register,
@@ -56,30 +59,29 @@ export default function BlogCommentArea() {
   const pathFetchComment = `/api/comment/${slug}`;
 
   const queryClient = useQueryClient();
-  const query = useQuery({
+  const query = useQuery<BlogCommentProps[]>({
     queryKey: ["comment", slug],
     queryFn: async () =>
       await fetch(pathFetchComment).then((res) => res.json()),
   });
-  const comments = query.data;
 
-  const mutation = useMutation({
-    mutationFn: async (data: FEComment) =>
+  const { mutate } = useMutation({
+    mutationFn: async (data: BlogCommentProps) =>
       await fetch(pathFetchComment, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          content: data.content,
-        }),
+        body: JSON.stringify(data),
       }),
     onSettled: async () => {
       return await queryClient.invalidateQueries({
         queryKey: ["comment", slug],
       });
     },
+    mutationKey: ["addComment", slug],
   });
+  const comments = query.data;
 
   // Don't forget that there are three states...
   if (status !== "authenticated") {
@@ -87,8 +89,13 @@ export default function BlogCommentArea() {
   }
 
   const submitHandler = async (data: FEComment) => {
-    mutation.mutate({
+    mutate({
       content: data.content,
+      userId,
+      userAvatar,
+      userName,
+      createdAt: new Date(Date.now()).toISOString(),
+      slug,
     });
     reset();
   };
@@ -131,7 +138,7 @@ export default function BlogCommentArea() {
           </Button>
         </div>
       </div>
-      <BlogCommentList comments={comments} />
+      {comments && <BlogCommentList comments={comments} />}
     </>
   );
 }

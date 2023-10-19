@@ -1,5 +1,9 @@
 import { db } from "@/db/drizzle";
-import { comments, insertCommentSchema } from "@/db/schema/comments";
+import {
+  FEInsertCommentSchema,
+  comments,
+  insertCommentSchema,
+} from "@/db/schema/comments";
 import { NextRequest, NextResponse } from "next/server";
 import { and, desc, eq } from "drizzle-orm";
 import { dateNow } from "@/lib/utils";
@@ -49,8 +53,20 @@ export async function POST(
     );
   }
 
+  const parseDataRes = FEInsertCommentSchema.safeParse(data);
+  if (!parseDataRes.success) {
+    return NextResponse.json(
+      {
+        error: parseDataRes.error.flatten(),
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+
   const newComment: unknown = {
-    ...data,
+    ...parseDataRes.data,
     slug,
     userId,
     createdAt: dateNow(),

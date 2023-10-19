@@ -21,7 +21,9 @@ export default function BlogPostPreview({
 }: BlogPostProps) {
   const router = useRouter();
   const clickHandler = () => {
-    router.push(`/${slug}`);
+    router.push(`/${slug}`, {
+      scroll: true,
+    });
   };
 
   return (

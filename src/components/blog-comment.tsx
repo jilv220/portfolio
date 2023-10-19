@@ -6,7 +6,7 @@ import { distanceToNow } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 
 export type BlogCommentProps = {
-  commentId: number;
+  commentId?: number;
   content: string;
   userId: string;
   userName: string;
@@ -47,8 +47,13 @@ export default function BlogComment({
   };
 
   return (
-    <div className="flex items-center space-x-4">
-      <Avatar className="h-10 w-10">
+    <div
+      className="items-center space-x-4"
+      style={{
+        display: mutation.isPending ? "none" : "flex",
+      }}
+    >
+      <Avatar className="w-10 h-10">
         <AvatarImage src={userAvatar} />
         <AvatarFallback>AF</AvatarFallback>
       </Avatar>
