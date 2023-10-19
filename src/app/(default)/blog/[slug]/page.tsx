@@ -22,7 +22,9 @@ export default async function BlogPost({
   return (
     <article>
       <header>
-        <Heading variant="h1">{blogMeta.title}</Heading>
+        <Heading variant="h1" as="h1">
+          {blogMeta.title}
+        </Heading>
         <Text className={cn("[&:not(:first-child)]:mt-2 text-xl")}>
           {blogMeta.description}
         </Text>

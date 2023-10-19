@@ -99,8 +99,13 @@ const Typography = React.forwardRef<HTMLElement, TypographyProps>(
 
 Typography.displayName = "Typography";
 
-const Heading = ({ className, children, variant = "h3" }: HeadingProps) => (
-  <Typography className={className} variant={variant} as={variant}>
+const Heading = ({
+  className,
+  children,
+  as = "h3",
+  variant = "h3",
+}: HeadingProps) => (
+  <Typography className={className} variant={variant} as={as}>
     {children}
   </Typography>
 );

@@ -1,11 +1,6 @@
 import FollowMe from "@/components/follow-me";
 import { Heading } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "About",
-};
 
 export default function About() {
   return (

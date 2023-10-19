@@ -9,8 +9,10 @@ export const metadata: Metadata = {
 export default function Projects() {
   return (
     <main className="container pt-6">
-      <Heading as="h2"> Main Projects </Heading>
-      <section className="grid grid-cols-3 gap-4 pt-6">
+      <Heading variant="h3" as="h1">
+        Main Projects
+      </Heading>
+      <section className="flex flex-col gap-4 pt-6 md:grid md:grid-cols-3">
         <ProjectCard
           title="Lbrygen"
           description="An Alternative Frontend for Odysee Written in Vue"
@@ -36,7 +38,7 @@ export default function Projects() {
         {" "}
         Misc.{" "}
       </Heading>
-      <section className="grid grid-cols-3 gap-4 py-6">
+      <section className="flex flex-col gap-4 py-6 md:grid md:grid-cols-3">
         <ProjectCard
           title="BB_RPB_TSL"
           description="A Trading Strategy for the Freqtrade Crypto Bot"

@@ -1,4 +1,5 @@
 import BlogPostPreview from "@/components/blog-post-preview";
+import { Heading } from "@/components/ui/typography";
 import { getAllPosts } from "@/lib/getBlogs";
 import { postsSchema } from "@/schemas/post";
 import { Metadata } from "next";
@@ -29,6 +30,9 @@ export default function Blog() {
 
   return (
     <>
+      <Heading variant="h1" as="h1" className="pb-6">
+        Recent Posts
+      </Heading>
       {postsMeta.map((pm) => (
         <BlogPostPreview {...pm} key={pm.title} />
       ))}

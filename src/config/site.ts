@@ -1,7 +1,7 @@
 export const siteConfig = {
-  title: "Lyu Ji",
-  description:
-    "A portfolio with blog posts, projects and overall summary of Lyu Ji.",
+  titleTemplate: "Web Developer Portfolio, React, Typescript, Nextjs",
+  description: `Web Developer site. Check out my projects, read some articles, 
+  connect me on social media, or send me a message or inqury.`,
   mainNav: [
     {
       href: "/",

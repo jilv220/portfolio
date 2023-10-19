@@ -30,7 +30,7 @@ export default function ProjectCard({
   className,
 }: ProjectCardProps) {
   return (
-    <Card className={cn(className)}>
+    <Card className={cn(className, "md:hover:scale-105 md:hover:transition")}>
       <CardHeader className="py-4">
         <CardTitle>{title}</CardTitle>
       </CardHeader>
