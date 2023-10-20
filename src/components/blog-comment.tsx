@@ -57,7 +57,7 @@ export default function BlogComment({
         <AvatarImage src={userAvatar} />
         <AvatarFallback>AF</AvatarFallback>
       </Avatar>
-      <div className="flex-grow">
+      <div className="flex-grow min-w-0">
         <div className="flex space-x-2">
           <b>{userName}</b>
           <time className="text-muted-foreground">{commentDate}</time>
@@ -70,7 +70,7 @@ export default function BlogComment({
             </button>
           )}
         </div>
-        <div>{content}</div>
+        <div className="break-words">{content}</div>
       </div>
     </div>
   );
