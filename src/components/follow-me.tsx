@@ -2,29 +2,18 @@
 
 import { Github, Linkedin } from "lucide-react";
 import { buttonVariants } from "./ui/button";
-import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export default function FollowMe() {
-  const [height, setHeight] = useState(0);
-
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setHeight(ref.current!.clientHeight);
-  }, []);
-
   return (
     <div
       className="fixed left-0 flex flex-col 
       [&>*]:h-14 [&>*]:w-14 [&>*]:text-[#fafafa] 
       [&>*]:hover:ease-out [&>*]:hover:duration-500  
       [&>*>*]:h-8 [&>*>*]:w-8"
-      ref={ref}
       style={{
-        top: `calc(50% - (${height}px / 2))`,
-        visibility: height === 0 ? "hidden" : "visible",
+        top: `calc(25% - (56px / 2))`,
       }}
     >
       <Link

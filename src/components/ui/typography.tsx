@@ -10,8 +10,8 @@ import { cn } from "@/lib/utils";
 const typographyVariants = cva("text-foreground", {
   variants: {
     variant: {
-      h1: "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl",
-      h2: "scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0",
+      h1: "scroll-m-20 text-4xl font-extrabold tracking-tight",
+      h2: "scroll-m-20 text-3xl font-bold tracking-tight first:mt-0",
       h3: "scroll-m-20 text-2xl font-semibold tracking-tight",
       h4: "scroll-m-20 text-xl font-semibold tracking-tight",
       h5: "scroll-m-20 text-lg font-semibold tracking-tight",
@@ -99,16 +99,17 @@ const Typography = React.forwardRef<HTMLElement, TypographyProps>(
 
 Typography.displayName = "Typography";
 
-const Heading = ({
-  className,
-  children,
-  as = "h3",
-  variant = "h3",
-}: HeadingProps) => (
-  <Typography className={className} variant={variant} as={as}>
-    {children}
-  </Typography>
+const Heading = React.forwardRef<HTMLElement, HeadingProps>(
+  ({ className, children, as = "h3", variant = "h3" }, ref) => {
+    return (
+      <Typography className={className} ref={ref} variant={variant} as={as}>
+        {children}
+      </Typography>
+    );
+  }
 );
+
+Heading.displayName = "Heading";
 
 const Text = ({ className, children, as = "p", variant = "p" }: TextProps) => (
   <Typography className={className} variant={variant} as={as}>
