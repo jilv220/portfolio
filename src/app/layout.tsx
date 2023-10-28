@@ -9,6 +9,7 @@ import { siteConfig } from "@/config/site";
 import NextQueryProvider from "@/components/query-provider";
 import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -52,6 +53,7 @@ export default function RootLayout({
             </NextQueryProvider>
           </NextAuthSessionProvider>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );

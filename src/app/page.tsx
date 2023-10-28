@@ -1,7 +1,7 @@
 "use client";
 
 import FollowMe from "@/components/follow-me";
-import InquryForm from "@/components/inqury-form";
+import InquiryForm from "@/components/inquiry-form";
 import { Heading, Text } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 import { useIntersectionObserver } from "@uidotdev/usehooks";
@@ -57,7 +57,7 @@ export default function About() {
               craft the perfect web solution together.
             </Text>
           </div>
-          <InquryForm />
+          <InquiryForm />
         </section>
         <FollowMe />
       </div>
