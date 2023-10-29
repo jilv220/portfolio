@@ -7,6 +7,9 @@ const bundleAnalyzer = withBundleAnalyzer({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+  experimental: {
+    webpackBuildWorker: true,
+  },
 };
 
 export default bundleAnalyzer(nextConfig);
