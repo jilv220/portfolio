@@ -14,6 +14,26 @@ export default function Projects() {
       </Heading>
       <section className="flex flex-col gap-4 pt-6 md:grid md:grid-cols-3">
         <ProjectCard
+          title="Next13 Realworld"
+          description="An Implementation of Realworld Spec Using Next13"
+          tags={["react", "nextjs", "tailwindcss", "third-party-api"]}
+          link="https://github.com/jilv220/next13-realworld"
+          liveLink="https://next13-realworld.vercel.app/"
+        ></ProjectCard>
+        <ProjectCard
+          title="Lucia Auth Server"
+          description="A starter auth-server with email login, email verification, password reset, 
+            and oauth implemented using lucia-auth"
+          tags={["express", "lucia-auth", "nodejs"]}
+          link="https://github.com/jilv220/lucia-auth-server"
+        ></ProjectCard>
+        <ProjectCard
+          title="Xcursor Build"
+          description="A system to effectly build custom cursor theme for X11"
+          tags={["bash", "shell", "just"]}
+          link="https://github.com/jilv220/xcursor-build"
+        ></ProjectCard>
+        <ProjectCard
           title="Lbrygen"
           description="An Alternative Frontend for Odysee Written in Vue"
           tags={["vue", "html", "rxjs", "tailwindcss"]}
@@ -24,13 +44,6 @@ export default function Projects() {
           description="A Twitter Bot That Quotes Tweets and Translate Them into Another Language"
           tags={["python", "twitter-api", "deepl-api", "sqlite", "systemd"]}
           link="https://github.com/jilv220/quote_translation_bot"
-        ></ProjectCard>
-        <ProjectCard
-          title="Next13 Realworld"
-          description="An Implementation of Realworld Spec Using Next13"
-          tags={["react", "nextjs", "tailwindcss", "third-party-api"]}
-          link="https://github.com/jilv220/next13-realworld"
-          liveLink="https://next13-realworld.vercel.app/"
         ></ProjectCard>
       </section>
 
