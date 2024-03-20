@@ -23,20 +23,18 @@ export default function About() {
           className={cn(
             "opacity-0 -translate-x-8 mb-6 text-center break-words",
             aboutEntry?.isIntersecting &&
-              "transition opacity-100 translate-x-0 duration-1000"
+            "transition opacity-100 translate-x-0 duration-1000"
           )}
         >
           <Heading className="mb-6" variant="h1" as="h1">
             About Me
           </Heading>
           <Text className="w-4/5 m-auto">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-            bibendum elementum tellus, id sollicitudin sem vulputate nec. In
-            vitae magna vitae nulla viverra condimentum. Aenean ut porta purus,
-            quis auctor ligula. Integer mattis risus rutrum dapibus facilisis.
-            Sed sit amet neque facilisis, consequat nisi in, dictum turpis. Sed
-            vel laoreet lectus, vel accumsan sem. Aliquam accumsan posuere
-            tristique.
+            Hi, I&apos; Lyu, a junior software engineer interested in web development.
+            I am a Linux nerd who daily drives CachyOS (an Arch derivative).
+            Recently, I&apos;ve also started using Vim motions inspired by Primeagen.
+            However, I&apos;m not too fond of customizing my Vim configs, so I use the VSCode Vim plugin instead.
+            Besides that, I also enjoy anime, Vtuber content, and Vocaloid music.
           </Text>
         </section>
         <section
@@ -44,7 +42,7 @@ export default function About() {
           className={cn(
             "opacity-0 -translate-x-8 flex flex-col",
             inquiryEntry?.isIntersecting &&
-              "transition opacity-100 translate-x-0 duration-1000"
+            "transition opacity-100 translate-x-0 duration-1000"
           )}
         >
           <div className="text-center break-words">

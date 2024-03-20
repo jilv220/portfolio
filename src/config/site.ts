@@ -1,6 +1,6 @@
 export const siteConfig = {
-  titleTemplate: "Web Developer Portfolio, React, Typescript, Nextjs",
-  description: `Web Developer site. Check out my projects, read some articles, 
+  titleTemplate: "Lyu Ji, React, Typescript, Nextjs",
+  description: `Junior Software Engineer. Check out my projects, read some articles, 
   connect me on social media, or send me a message or inqury.`,
   mainNav: [
     {
@@ -10,6 +10,10 @@ export const siteConfig = {
     {
       href: "/projects",
       name: "projects",
+    },
+    {
+      href: "/resume",
+      name: "resume"
     },
     {
       href: "/blog",
