@@ -1,3 +1,4 @@
+import { Conf } from "@/config";
 import { ServerClient } from "postmark";
 
-export const transporter = new ServerClient(process.env.POSTMARK_SECRET!);
+export const transporter = new ServerClient(Conf.POSTMARK_SECRET!);
